@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "TerminatorGen";
+  src: url("./assets/fonts/terminatorgen.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.swiper-pagination {
+  bottom: 60px !important;
+  left: 2px !important;
+  z-index: 20 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 768px) {
+  .swiper-pagination {
+    display: none !important;
+  }
+}
+
+.swiper-pagination-bullet {
+  width: 60px !important;
+  height: 8px;
+  border-radius: 0 !important;
+  background-color: #ccc !important;
+  opacity: 1 !important;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff0096 !important;
+}
