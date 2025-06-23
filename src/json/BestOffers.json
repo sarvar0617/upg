@@ -1,0 +1,82 @@
+[
+  {
+    "id": 11,
+    "title": "Asus Blue Cave AC2600",
+    "brand": "Asus",
+    "price": 913500,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/70/63/2a/70632ae60ad362f6d6a8b4b4fe86d973a75b3eaad9cd19e6533d812eb17d49bf.png"
+  },
+  {
+    "id": 12,
+    "title": "Govee H61A0 Neon LED Strip Light 3m",
+    "brand": "Govee",
+    "price": 796050,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/cd/47/5d/cd475d8716efeee9ccada2c39529fa189f7bfe8c8be2117d05b4458ece2b00fa.png"
+  },
+  {
+    "id": 13,
+    "title": "HyperX QuadCast S White",
+    "brand": "HyperX",
+    "price": 2309000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/e7/1c/47/e71c47f186b3b781c98e97d7fb97343f94ef18809992f37668ba8b34fcb74813.png"
+  },
+  {
+    "id": 14,
+    "title": "Keychron V1 Wired 84 Key",
+    "brand": "Keychron",
+    "price": 1031000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/4d/a2/f8/4da2f825627fefadd6630231e732cac03283574c08dc91e29df918bc0b7fcb81.png"
+  },
+  {
+    "id": 15,
+    "title": "Logitech Pro X Superlight 2 White Wireless",
+    "brand": "Logitech",
+    "price": 2080000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/6e/34/dc/6e34dc65d33723ea8fa9d0a1dd67e6960710a9a537705a5d2c546ae3d733b15a.png"
+  },
+  {
+    "id": 16,
+    "title": "MSI G274F 27\" 180Hz Rapid IPS",
+    "brand": "MSI",
+    "price": 2358750,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/a5/7e/e6/a57ee6ce48afa491352d4086af5f678ed43623cf669606dfb4b873e30e2e11d3.png"
+  },
+  {
+    "id": 17,
+    "title": "Pwnage Stormbreaker Wireless BLG Edition",
+    "brand": "Pwnage",
+    "price": 2048000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/f1/b4/bd/f1b4bd8e4cf95ecae5af5024e4e9a5c8d6a32853bf00b8b6f83ca1824e288151.png"
+  },
+  {
+    "id": 18,
+    "title": "Razer Barracuda X Wireless",
+    "brand": "Razer",
+    "price": 1287000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/ef/ba/6e/efba6e1e8b119bef1abe80801e77cf4498b5f7c659928795ddeb7680171e470f.png"
+  },
+  {
+    "id": 19,
+    "title": "Sony Dualsense PS5 Gamepad Volcanic Red",
+    "brand": "Sony",
+    "price": 975000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/dc/d7/d9/dcd7d93c4d90524da8f15c11967aa39e374fce9c920b33bd21d536a0622579bf.png"
+  },
+  {
+    "id": 20,
+    "title": "Стол Нежный черный L",
+    "brand": "UPG",
+    "price": 3263000,
+    "currency": "UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/3f/91/30/3f91303a19cc90c16a21bf88d9e5817ed266e7d7e37717e41a82df09c9337558.png"
+  }
+]

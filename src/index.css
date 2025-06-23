@@ -1,7 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @font-face {
   font-family: "TerminatorGen";
   src: url("./assets/fonts/terminatorgen.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Massarette';
+  src: url('/fonts/Massarette.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,5 +37,5 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ff0096 !important;
+  background-color: #ff6518 !important;
 }

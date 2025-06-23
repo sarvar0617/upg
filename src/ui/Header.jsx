@@ -5,16 +5,15 @@ import { FaCodeCompare, FaRegHeart } from "react-icons/fa6";
 import { FiSun } from "react-icons/fi";
 import { GrContact } from "react-icons/gr";
 import { SlBasket } from "react-icons/sl";
-
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  
   return (
     <header className="shadow-md bg-white w-full">
       <div className="container mx-auto px-4 md:px-6 h-20 flex gap-5 justify-between items-center">
         {/* Logo */}
-        <div className="text-xl font-bold text-gray-800 font-[TerminatorGen]">
-          Logo
+        <div className="text-2xl font-bold  font-[TerminatorGen] cursor-pointer text-orange-600 ">
+          <Link to="/">Logo</Link>
         </div>
 
         {/* Search */}
@@ -42,8 +41,11 @@ const Header = () => {
             <span>Избранное</span>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-            <SlBasket size={18} />
-            <span>Корзина</span>
+            <Link to="/cart" className="flex items-center gap-1">
+              <SlBasket size={18} />
+
+              <span>Корзина</span>
+            </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
             <GrContact size={18} />
@@ -54,8 +56,10 @@ const Header = () => {
             <span>Тема</span>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-            <FaRegUserCircle size={20} />
-            <span>Профиль</span>
+            <Link to="/register" className="flex space-x-1">
+              <FaRegUserCircle size={20} />
+              <span>Профиль</span>
+            </Link>
           </li>
         </ul>
 

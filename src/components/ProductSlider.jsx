@@ -43,11 +43,14 @@ const ImageSlider = () => {
 
         {/* Navigatsiya tugmalari (dizayn o‘zgarmadi) */}
         <div className="absolute bottom-16 right-4 z-10  gap-2 lg:flex hidden">
-          <button className="swiper-prev cursor-pointer bg-[#ff0096] flex justify-center items-center text-white w-15 h-15">
+          <button className="swiper-next cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
             <FaArrowLeftLong size={25} />
           </button>
-          <button className="swiper-next cursor-pointer bg-[#ff0096] flex justify-center items-center text-white w-15 h-15">
-            <FaArrowRightLong size={25} />
+          <button className="swiper-next cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
+            <FaArrowRightLong
+              className="hover:text-orange-600 transition"
+              size={25}
+            />
           </button>
         </div>
       </Swiper>

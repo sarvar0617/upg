@@ -1,0 +1,122 @@
+[
+  {
+    "id": 21,
+    "title": "Клавиатуры",
+    "image": "https://files.ox-sys.com/cache/original/image/d3/23/48/d32348b36c863e6fbcec18f69f0d2274d898db0eceda1675e89fd0ed08b7db0c.png"
+  },
+  {
+    "id": 22,
+    "title": "Мыши",
+    "image": "https://files.ox-sys.com/cache/original/image/d3/dd/68/d3dd6827ae0f9d8999e0573816c14d875a57220be0a7e4d85cc5c6fba3a5c428.png"
+  },
+  {
+    "id": 23,
+    "title": "Микрофоны",
+    "image": "https://files.ox-sys.com/cache/original/image/96/07/95/96079505d678680959dc0583173ee6aec88d410293eceeac98f3d586b263bab3.png"
+  },
+  {
+    "id": 24,
+    "title": "Наушники",
+    "image": "https://files.ox-sys.com/cache/original/image/ce/7a/d3/ce7ad3f5d18ab3247d08fcb5d54c6f0f4fcf1d2fb358cd58e7645a051f18b527.png"
+  },
+  {
+    "id": 25,
+    "title": "Мониторы",
+    "image": "https://files.ox-sys.com/cache/original/image/7e/0a/e5/7e0ae5bd85f152a83a95341d111b6fe0e3b6e2153059db0eefc9e8a30c8871ca.png"
+  },
+  {
+    "id": 26,
+    "title": "Кронштейны",
+    "image": "https://files.ox-sys.com/cache/original/image/be/17/38/be1738133cab1f5a7f60d6aedbdb67e08f5315c4c613d83e742fd3b25b9a7553.png"
+  },
+  {
+    "id": 27,
+    "title": "Колонки",
+    "image": "https://files.ox-sys.com/cache/original/image/2e/bf/fa/2ebffa53825ced446e5868fc9f51accfb1b41c77b0ebbfb5799ef620b33d741e.png"
+  },
+  {
+    "id": 28,
+    "title": "Коврики",
+    "image": "https://files.ox-sys.com/cache/original/image/44/d4/91/44d4917eb0aae08938709e5201034f2cf8046f9b9d3f105c0accc763d8a0dcd6.png"
+  },
+  {
+    "id": 29,
+    "title": "Ноутбуки",
+    "image": "https://files.ox-sys.com/cache/original/image/05/d6/3c/05d63cb59036e8d0b0730d1a16d5a29856cb610dcf1dfc7ea2a96db635d29655.png"
+  },
+  {
+    "id": 30,
+    "title": "Консоли",
+    "image": "https://files.ox-sys.com/cache/original/image/ab/1a/c1/ab1ac1173586ca800c5a70de0eff02f3a04a35b61caa0dd9c2c4f346569bda5b.png"
+  },
+  {
+    "id": 31,
+    "title": "Контроллеры",
+    "image": "https://files.ox-sys.com/cache/original/image/c0/35/29/c0352983c72761cab5b1253f6f5c96b98d8387b9b8366816908622fdb24da771.png"
+  },
+  {
+    "id": 32,
+    "title": "Wi-Fi адаптеры",
+    "image": "https://files.ox-sys.com/cache/original/image/22/d7/fe/22d7fece745d88bb4f35247960fc5b7631c6311d1498868209da5a492bb39302.png"
+  },
+  {
+    "id": 33,
+    "title": "Корпуса",
+    "image": "https://files.ox-sys.com/cache/original/image/a3/bd/74/a3bd74921ffd933f98ead0c0c6537e6fd9477a22c5681a0328b42f73a51b08a3.png"
+  },
+  {
+    "id": 34,
+    "title": "Процессоры",
+    "image": "https://files.ox-sys.com/cache/original/image/87/7b/67/877b676d39ab4e2017e106b206e2bd9f111c10c245d5dfd4f572b4bfebd27e34.png"
+  },
+  {
+    "id": 35,
+    "title": "Видеокарты",
+    "image": "https://files.ox-sys.com/cache/original/image/7d/51/a4/7d51a49695ac0c3d6a73a61ae6da13ef76100890bb8c50504eab92ab6ef218be.png"
+  },
+  {
+    "id": 36,
+    "title": "Оперативная память",
+    "image": "https://files.ox-sys.com/cache/original/image/c9/fc/1b/c9fc1bda48ef7c72cc59a3e1b7617db9ec19eb39886eed6ae38d27f5e132ac19.png"
+  },
+  {
+    "id": 37,
+    "title": "Материнские платы",
+    "image": "https://files.ox-sys.com/cache/original/image/6d/c5/f3/6dc5f3f542ca4e434e8f42e08fcaed60182aeeab9b882d4dd28dbbc896e01e34.png"
+  },
+  {
+    "id": 38,
+    "title": "SSD диски",
+    "image": "https://files.ox-sys.com/cache/original/image/d7/d8/56/d7d856db89c3388c72819c3a667fe36cc3756f0f752164a5e724e921b0f65851.png"
+  },
+  {
+    "id": 39,
+    "title": "Кулеры",
+    "image": "https://files.ox-sys.com/cache/original/image/2e/61/88/2e61881c365054706a92f6f68852978d415193f73bdacf40c461fd0689e7a10c.png"
+  },
+  {
+    "id": 40,
+    "title": "Блоки питания",
+    "image": "https://files.ox-sys.com/cache/original/image/c9/f3/74/c9f374f8d7da6441afaeae2c270912b54c037f4a017dde8e9236d733b33ba19e.png"
+  },
+  {
+    "id": 41,
+    "title": "Столы",
+    "image": "https://files.ox-sys.com/cache/original/image/6a/bd/67/6abd67393226735cb30a676d29e4d5e3d1d0940f3adddcc6a1b70b8419829fb6.png"
+  },
+  {
+    "id": 42,
+    "title": "Кресла",
+    "image": "https://files.ox-sys.com/cache/original/image/bb/07/74/bb077438d966ec1d67a3fa82b69064240bb02a3b3a2892354c3df0bee88bd874.png"
+  },
+  {
+    "id": 43,
+    "title": "Освещение",
+    "image": "https://files.ox-sys.com/cache/original/image/bc/ac/9b/bcac9bb4a74f53f66b66478841f232b1f9c649e9918c6c607866c8c4f6886a1e.png"
+  },
+  {
+    "id": 44,
+    "title": "Аксессуары",
+    "image": "https://files.ox-sys.com/cache/original/image/8f/12/fb/8f12fb229084383bafc7b4e3ae297924c67154b48170ae6b4f868b7f7d07473f.png"
+  }
+]

@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "Brateck LDT69-C022 Black",
     "brand": "Brateck",
     "price": 1110000,
@@ -7,6 +8,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/dd/13/2c/dd132cbf69449eb24ac58383c5dbf04522cbc59b4c6c9dd77156f76beabebce1.png"
   },
   {
+    "id": 2,
     "title": "DarkProject ALU87 Daylight",
     "brand": "Dark Project",
     "price": 1175000,
@@ -14,6 +16,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/2e/3d/ca/2e3dcae656853932acb8b355f2cbaadb35a8e9d33706574e6937fa9085d23a21.png"
   },
   {
+    "id": 3,
     "title": "DarkProject ALU87 Midnight",
     "brand": "Dark Project",
     "price": 1175000,
@@ -21,6 +24,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/41/f3/87/41f387606e8d5787995b7c5c37ab03fe7b9665ac9112329b9078237e0cfb5b79.png"
   },
   {
+    "id": 4,
     "title": "DarkProject ALU87 Violet",
     "brand": "Dark Project",
     "price": 849000,
@@ -28,6 +32,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/81/d4/f4/81d4f4821852c26a6471a02251c9503ba5fc4fb469d8c5979381a9cb578e608d.png"
   },
   {
+    "id": 5,
     "title": "HyperX Cloud III Red Wireless",
     "brand": "HyperX",
     "price": 2100000,
@@ -35,6 +40,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/10/3d/16/103d16da78a5530d3b5710e5e86ec06aaf77e37654a843af43d54e2718f8fe4f.png"
   },
   {
+    "id": 6,
     "title": "HyperX QuadCast 2",
     "brand": "HyperX",
     "price": 1755000,
@@ -42,6 +48,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/93/91/20/939120b096040e83e2e842de03d10f5d262a0f74df665b6f2662b1e852d99fa0.png"
   },
   {
+    "id": 7,
     "title": "Red Square Alumix TKL Classic Kitsune White [RSQ-20052]",
     "brand": "Red Square",
     "price": 1235000,
@@ -49,6 +56,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/aa/43/5a/aa435a42be013f160ccaae5efd5213933b4045d0181906abc214adb51a8db0f0.png"
   },
   {
+    "id": 8,
     "title": "Thronmax Twins Studio Boom Arm S8",
     "brand": "Thronmax",
     "price": 783000,
@@ -56,6 +64,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/e0/f6/97/e0f6974912a85e2f8d364db4031f1aa0b3776e9022fc8a5a2fbdfebcea9c71ca.png"
   },
   {
+    "id": 9,
     "title": "UPGrade ASH GREY",
     "brand": "UPG",
     "price": 585000,
@@ -63,6 +72,7 @@
     "image": "https://files.ox-sys.com/cache/500x_/image/51/13/09/511309fd5c8416eec800336e74df64a5a3755f6905545594501e530aa0ed7af6.png"
   },
   {
+    "id": 10,
     "title": "Victrix Pro BFG White Wireless",
     "brand": "Playstation",
     "price": 3212500,
