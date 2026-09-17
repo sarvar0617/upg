@@ -10,8 +10,10 @@ import ComponentsSlider from "../components/ComponentSlider";
 import Team from "./Team";
 import AboutHelp from "../components/AboutHelp";
 import Supports from "./Supports";
+import { useCurrency } from "../context/CurrencyContext";
 
 const Home = () => {
+  const { formatPrice } = useCurrency();
   const [newProduct, setNewProduct] = useState(NewProduct);
   const [bestOffers, setBestOffers] = useState(BestOffers);
 
@@ -56,10 +58,7 @@ const Home = () => {
                   </span>
                 </div>
                 <p className="text-lg font-bold text-gray-700 mt-1">
-                  {product.price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}{" "}
-                  UZS
+                  {formatPrice(product.price)}
                 </p>
                 <button className="bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
                   <SlBasket className="" size={20} /> В корзину
@@ -107,10 +106,7 @@ const Home = () => {
                   </span>
                 </div>
                 <p className="text-lg font-bold text-gray-700 mt-1">
-                  {product.price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}{" "}
-                  UZS
+                  {formatPrice(product.price)}
                 </p>
                 <button className="bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
                   <SlBasket className="" size={20} /> В корзину

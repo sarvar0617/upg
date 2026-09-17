@@ -6,8 +6,11 @@ import { FiSun } from "react-icons/fi";
 import { GrContact } from "react-icons/gr";
 import { SlBasket } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import { useCurrency } from "../context/CurrencyContext";
 
 const Header = () => {
+  const { currency, toggleCurrency } = useCurrency();
+
   return (
     <header className="shadow-md bg-white w-full">
       <div className="container mx-auto px-4 md:px-6 h-20 flex gap-5 justify-between items-center">
@@ -29,10 +32,17 @@ const Header = () => {
 
         {/* Icons */}
         <ul className="hidden lg:flex items-center gap-5 text-sm text-gray-700">
-          <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-            <CiWallet size={20} />
-            <span>UZS/USD</span>
+          <li className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={toggleCurrency}
+              className="flex cursor-pointer items-center gap-1 hover:text-orange-600"
+            >
+              <CiWallet size={20} />
+              <span>{currency}</span>
+            </button>
           </li>
+
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
             <FaCodeCompare size={18} />
             <span>Сравнение</span>
@@ -51,8 +61,10 @@ const Header = () => {
             </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-            <GrContact size={18} />
-            <span>Контакты</span>
+            <Link to="/contact" className="flex items-center gap-1">
+              <GrContact size={18} />
+              <span>Контакты</span>
+            </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
             <FiSun size={18} />
