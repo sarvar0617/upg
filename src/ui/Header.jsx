@@ -13,6 +13,7 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 h-20 flex gap-5 justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold  font-[TerminatorGen] cursor-pointer text-orange-600 ">
+
           <Link to="/">Logo</Link>
         </div>
 
@@ -38,7 +39,9 @@ const Header = () => {
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
             <FaRegHeart size={18} />
-            <span>Избранное</span>
+            <Link to="favorites">
+              <span>Избранное</span>
+            </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
             <Link to="/cart" className="flex items-center gap-1">

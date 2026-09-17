@@ -7,6 +7,9 @@ import BestOffers from "../json/BestOffers.json";
 
 import { Link } from "react-router-dom";
 import ComponentsSlider from "../components/ComponentSlider";
+import Team from "./Team";
+import AboutHelp from "../components/AboutHelp";
+import Supports from "./Supports";
 
 const Home = () => {
   const [newProduct, setNewProduct] = useState(NewProduct);
@@ -140,9 +143,7 @@ const Home = () => {
         <ComponentsSlider />
         <div className=" px-4 py-10">
           <h1 className="text-3xl font-[terminatorgen] mb-6">О КОМПАНИИ</h1>
-
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Rasm */}
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-0">
             <div className="lg:w-1/2">
               <img
                 src="https://files.ox-sys.com/cache/original/image/36/94/94/3694947a86fda51618fea2564bd2a93232511cd2b749880349a06870cdf80e87.jpg"
@@ -151,28 +152,31 @@ const Home = () => {
               />
             </div>
 
-            {/* Matn qismi */}
-            <div className="lg:w-1/2 space-y-4">
-              <h2 className="text-2xl font-semibold">О компании</h2>
-              <p>
-                С 2009 года мы продаем компьютерную технику в Узбекистане. Мы -
-                официальные партнеры многих международных компаний, что
-                гарантирует качество нашей продукции.
-              </p>
-              <p>
-                Наши опытные сотрудники всегда готовы помочь с выбором техники.
-                В нашем шоуруме представлен широкий ассортимент товаров.
-              </p>
-              <p>
-                Мы предлагаем доставку по всей республике и поддерживаем все
-                виды оплаты для вашего удобства.
-              </p>
-              <button className="border border-orange-600 text-orange-600 px-4 py-2 rounded hover:bg-orange-600 hover:text-white transition">
-                Узнать больше
-              </button>
+            <div className="lg:w-1/2 border border-gray-200 p-6">
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold">О компании</h2>
+                <p>
+                  С 2009 года мы продаем компьютерную технику в Узбекистане. Мы -
+                  официальные партнеры многих международных компаний, что
+                  гарантирует качество нашей продукции.
+                </p>
+                <p>
+                  Наши опытные сотрудники всегда готовы помочь с выбором техники.
+                  В нашем шоуруме представлен широкий ассортимент товаров.
+                </p>
+                <p>
+                  Мы предлагаем доставку по всей республике и поддерживаем все
+                  виды оплаты для вашего удобства.
+                </p>
+                <Link to="/team" className="border border-orange-600 text-orange-600 px-4 py-2 rounded hover:bg-orange-600 hover:text-white transition">
+                  Узнать больше
+                </Link>
+              </div>
             </div>
           </div>
+             <AboutHelp />
         </div>
+        <Supports />
       </div>
     </div>
   );

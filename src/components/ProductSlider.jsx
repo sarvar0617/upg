@@ -21,8 +21,8 @@ const ImageSlider = () => {
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         navigation={{
-          nextEl: ".swiper-next",
-          prevEl: ".swiper-prev",
+          nextEl: ".product-swiper-next",
+          prevEl: ".product-swiper-prev",
         }}
         pagination={{
           clickable: true,
@@ -43,10 +43,10 @@ const ImageSlider = () => {
 
         {/* Navigatsiya tugmalari (dizayn o‘zgarmadi) */}
         <div className="absolute bottom-16 right-4 z-10  gap-2 lg:flex hidden">
-          <button className="swiper-next cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
+          <button className="product-swiper-prev cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
             <FaArrowLeftLong size={25} />
           </button>
-          <button className="swiper-next cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
+          <button className="product-swiper-next cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition flex justify-center items-center text-white w-15 h-15">
             <FaArrowRightLong
               className="hover:text-orange-600 transition"
               size={25}

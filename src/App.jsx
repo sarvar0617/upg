@@ -10,7 +10,10 @@ import Layout from "./layouts/Layout";
 import Cart from "./pages/Cart";
 import ProductDeatail from "./pages/ProductDeatail";
 import Register from "./pages/auth/Register";
+import Favorites from "./pages/Favorites";
 import Sms from "./pages/auth/Sms";
+import Team from "./pages/Team";
+import Faq from "./pages/Faq";
 
 const App = () => {
   return (
@@ -22,7 +25,10 @@ const App = () => {
           <Route path="upgrade" element={<Upgrade />} />
           <Route path="delivery" element={<Delivery />} />
           <Route path="payment" element={<Payment />} />
+          <Route path="faq" element={<Faq />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="favorites" element={<Favorites/>}/>
+          <Route path="team" element={<Team />} />
           <Route path="cart" element={<Cart />} />
           <Route path="productdetail/:id" element={<ProductDeatail />} />
           <Route path="register" element={<Register />} />
