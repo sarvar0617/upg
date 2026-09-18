@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ImageSlider from "../components/ProductSlider";
-import NewProduct from "../json/NewProduct.json";
 import { FaStar } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
-import BestOffers from "../json/BestOffers.json";
 
 import { Link } from "react-router-dom";
 import ComponentsSlider from "../components/ComponentSlider";
@@ -11,11 +9,16 @@ import Team from "./Team";
 import AboutHelp from "../components/AboutHelp";
 import Supports from "./Supports";
 import { useCurrency } from "../context/CurrencyContext";
+import { useGetAllProductsQuery } from "../services/ProductApi";
 
 const Home = () => {
   const { formatPrice } = useCurrency();
-  const [newProduct, setNewProduct] = useState(NewProduct);
-  const [bestOffers, setBestOffers] = useState(BestOffers);
+  const { data, error, isLoading } = useGetAllProductsQuery();
+  const newProduct = data?.newProducts || [];
+  const bestOffers = data?.bestOffers || [];
+
+  if (isLoading) return <div className="container mx-auto px-4 py-10">Loading...</div>;
+  if (error) return <div className="container mx-auto px-4 py-10">Mahsulotlarni yuklashda xatolik yuz berdi.</div>;
 
   return (
     <div>
