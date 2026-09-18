@@ -52,8 +52,8 @@ const Contact = () => {
         <span>bekhruz@upg.uz</span>
       </div>
 
-      <section className="relative mt-5 grid min-h-[355px] lg:grid-cols-[450px_1fr]">
-        <div className="z-10 bg-gray-50 p-7">
+      <section className="mt-5 grid gap-4 lg:grid-cols-[450px_1fr]">
+        <div className="bg-gray-50 p-5 sm:p-7">
           <h2 className="mb-4 text-2xl">Карта</h2>
 
           <div className="space-y-3">
@@ -102,7 +102,7 @@ const Contact = () => {
         <iframe
           title="Карта магазинов"
           src="https://www.google.com/maps?q=Tashkent%20Uzbekistan&output=embed"
-          className="absolute inset-0 h-full w-full border-0 lg:pl-[450px]"
+          className="h-[320px] w-full border-0 lg:h-[355px]"
           loading="lazy"
         />
       </section>

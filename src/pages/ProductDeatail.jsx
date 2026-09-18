@@ -51,7 +51,7 @@ const ProductDetail = () => {
         {/* RIGHT INFO */}
         <div>
           {/* Mahsulot narxi va tugmalar */}
-          <div className="space-y-4 flex flex-col justify-between border border-[#00000017] p-4 h-72 shadow-sm rounded-md">
+          <div className="space-y-4 flex flex-col justify-between border border-[#00000017] p-4 min-h-56 shadow-sm rounded-md">
             {/* Yuqori qism: mavjudlik va narx */}
             <div>
               <span className="text-green-500 font-medium">В наличии</span>

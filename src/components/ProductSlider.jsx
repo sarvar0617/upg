@@ -29,7 +29,7 @@ const ImageSlider = () => {
         }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
-        className="!pb-12 relative [&_.swiper-pagination]:md:flex hidden" // pastda joy qolishi uchun
+        className="!pb-12 relative" // pastda joy qolishi uchun
       >
         {images.map((src, i) => (
           <SwiperSlide key={i}>

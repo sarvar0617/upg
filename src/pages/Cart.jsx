@@ -51,13 +51,13 @@ const Cart = () => {
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 mt-8">
           <div className="space-y-4">
             {cart.map((item) => (
-              <div key={item.id} className="border rounded-lg p-4 flex gap-4 items-center">
+              <div key={item.id} className="border rounded-lg p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                 <img src={item.image} alt={item.title} className="w-24 h-24 object-contain" />
                 <div className="flex-1">
                   <Link to={`/productdetail/${item.id}`} className="font-semibold hover:text-orange-600">{item.title}</Link>
                   <p className="text-orange-600 font-bold mt-2">{formatPrice(item.price)}</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 self-center sm:self-auto">
                   <button type="button" onClick={() => updateCartQuantity(item.id, item.quantity - 1)} className="border rounded p-2"><FaMinus size={12} /></button>
                   <span>{item.quantity}</span>
                   <button type="button" onClick={() => updateCartQuantity(item.id, item.quantity + 1)} className="border rounded p-2"><FaPlus size={12} /></button>
