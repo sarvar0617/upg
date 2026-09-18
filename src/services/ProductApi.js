@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1";
-const useSupabase = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+const useSupabase = !import.meta.env.VITE_API_URL && Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 
 const normalizeProduct = (product) => ({
   ...product,
