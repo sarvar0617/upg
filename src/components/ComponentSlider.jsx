@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import Components from "../json/Components.json";
 
 const ComponentsSlider = () => {
   const [components] = useState(Components);
+  const navigate = useNavigate();
 
   const chunked = [];
   for (let i = 0; i < components.length; i += 8) {
@@ -40,6 +42,14 @@ const ComponentsSlider = () => {
                 {group.map((item) => (
                   <div
                     key={item.id}
+                    onClick={() => navigate(`/products?category=${item.id}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        navigate(`/products?category=${item.id}`);
+                      }
+                    }}
                     className="bg-gray-100 hover:bg-gray-200 border border-gray-200 transition-transform cursor-pointer p-4 flex flex-col items-center rounded-sm shadow"
                   >
                     <img

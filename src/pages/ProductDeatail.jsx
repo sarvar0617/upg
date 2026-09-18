@@ -1,62 +1,83 @@
 import React, { useState } from "react";
-import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
-import { SlBasket } from "react-icons/sl";
 import { Link, useParams } from "react-router-dom";
-import { useGetAllProductsQuery, useGetProductBySlugQuery } from "../services/ProductApi";
+import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaStar } from "react-icons/fa";
+import { SlBasket } from "react-icons/sl";
+import { useGetAllProductsQuery } from "../services/ProductApi";
 import { useCurrency } from "../context/CurrencyContext";
 import { useProducts } from "../context/ProductContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const { data, error, isLoading } = useGetAllProductsQuery();
   const { formatPrice } = useCurrency();
-  const { addToCart, isFavorite, toggleFavorite } = useProducts();
+  const { cart, addToCart, updateCartQuantity, toggleFavorite, isFavorite } = useProducts();
   const [activeTab, setActiveTab] = useState("characteristics");
-  const { data: product, error, isLoading } = useGetProductBySlugQuery(id);
-  const { data: catalog } = useGetAllProductsQuery();
+  const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
+  const [quickOrderSent, setQuickOrderSent] = useState(false);
+
+  const allProducts = data?.products || [
+    ...(data?.newProducts || []),
+    ...(data?.bestOffers || []),
+  ];
+  const product = allProducts.find((item) => String(item.id) === id);
 
   if (isLoading) return <div className="container mx-auto px-4 py-10">Loading...</div>;
-  if (error || !product) return <div className="container mx-auto px-4 py-10">Mahsulot topilmadi</div>;
+  if (error || !product) {
+    return <div className="container mx-auto px-4 py-10">Mahsulot topilmadi</div>;
+  }
 
-  const similar = (catalog?.products || [])
+  const similar = allProducts
     .filter((item) => item.id !== product.id && item.categoryId === product.categoryId)
     .slice(0, 4);
   const favorite = isFavorite(product.id);
+  const cartItem = cart.find((item) => item.id === product.id);
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-8">
-      <div className="text-sm text-gray-500 mb-4">
-        <Link to="/" className="hover:text-orange-600">Главная</Link> / {product.title}
-      </div>
-      <h1 className="text-2xl md:text-3xl font-bold mb-8">{product.title}</h1>
-      <div className="grid lg:grid-cols-2 gap-8">
-        <div className="border border-gray-200 rounded-lg p-5 flex items-center justify-center min-h-[420px]">
-          <img src={product.image} alt={product.title} className="max-h-[400px] max-w-full object-contain" />
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl mb-4 font-bold">{product.title}</h1>
+      <div className="max-w-7xl mx-auto mt-10 p-4 grid md:grid-cols-2 gap-6">
+        {/* LEFT IMAGE */}
+
+        <div>
+          <div className="border border-[#0000000e]">
+            <img
+              src={product.image}
+              alt={product.title}
+              className="w-full rounded-lg shadow"
+            />
+          </div>
         </div>
-        <div className="border border-gray-200 rounded-lg p-6 flex flex-col justify-between">
-          <div>
-            <div className="flex justify-between items-start gap-4">
-              <span className={product.stock > 0 ? "text-green-600" : "text-red-500"}>
-                {product.stock > 0 ? "В наличии" : "Нет в наличии"}
-              </span>
-              <button
-                type="button"
-                onClick={() => toggleFavorite(product)}
-                aria-label={favorite ? "Удалить из избранного" : "Добавить в избранное"}
-                className="text-2xl text-pink-500 hover:scale-110 transition"
-              >
-                {favorite ? <FaHeart /> : <FaRegHeart />}
-              </button>
+
+        {/* RIGHT INFO */}
+        <div>
+          {/* Mahsulot narxi va tugmalar */}
+          <div className="space-y-4 flex flex-col justify-between border border-[#00000017] p-4 h-72 shadow-sm rounded-md">
+            {/* Yuqori qism: mavjudlik va narx */}
+            <div>
+              <span className="text-green-500 font-medium">В наличии</span>
+              <p className="text-gray-700 text-2xl font-semibold mt-2">
+                Цена: {formatPrice(product.price)}
+              </p>
             </div>
-            <div className="flex items-center gap-1 text-yellow-400 mt-6"><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></div>
-            <p className="text-3xl font-bold text-gray-800 mt-5">{formatPrice(product.price)}</p>
-            {product.oldPrice && <p className="text-gray-400 line-through">{formatPrice(product.oldPrice)}</p>}
-            <p className="text-gray-500 mt-4">Производитель: <b className="text-gray-800">{product.brand}</b></p>
+
+            <button type="button" onClick={() => toggleFavorite(product)} className="mt-4 flex items-center gap-2 text-pink-500">
+              {favorite ? <FaHeart /> : <FaRegHeart />}
+              {favorite ? "В избранном" : "В избранное"}
+            </button>
           </div>
           <div className="space-y-3 mt-8">
-            <button type="button" onClick={() => addToCart(product)} className="w-full bg-orange-600 text-white py-3 rounded hover:bg-orange-700 transition flex justify-center items-center gap-2">
-              <SlBasket /> В корзину
-            </button>
-            <button type="button" className="w-full border border-orange-600 text-orange-600 py-3 rounded hover:bg-orange-50 transition">Купить в один клик</button>
+            {cartItem ? (
+              <div className="w-full h-12 flex items-center justify-center gap-8 border border-orange-600 rounded text-orange-600">
+                <button type="button" onClick={() => updateCartQuantity(product.id, cartItem.quantity - 1)} className="cursor-pointer p-3"><FaMinus size={14} /></button>
+                <span className="font-bold text-lg">{cartItem.quantity}</span>
+                <button type="button" onClick={() => updateCartQuantity(product.id, cartItem.quantity + 1)} className="cursor-pointer p-3"><FaPlus size={14} /></button>
+              </div>
+            ) : (
+              <button type="button" onClick={() => addToCart(product)} className="cursor-pointer w-full bg-orange-600 text-white py-3 rounded hover:bg-orange-700 transition flex justify-center items-center gap-2">
+                <SlBasket /> В корзину
+              </button>
+            )}
+            <button type="button" onClick={() => setIsQuickOrderOpen(true)} className="w-full border border-orange-600 text-orange-600 py-3 rounded hover:bg-orange-50 transition">Купить в один клик</button>
           </div>
         </div>
       </div>
@@ -82,6 +103,31 @@ const ProductDetail = () => {
       </section>
 
       {similar.length > 0 && <section className="mt-12"><h2 className="text-2xl font-bold mb-5">Похожие товары</h2><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">{similar.map((item) => <Link to={`/productdetail/${item.id}`} key={item.id} className="border rounded-lg p-4 hover:shadow-lg transition"><img src={item.image} alt={item.title} className="w-full h-40 object-contain" /><p className="font-semibold mt-3">{item.title}</p><p className="text-orange-600 font-bold mt-2">{formatPrice(item.price)}</p></Link>)}</div></section>}
+
+      {isQuickOrderOpen && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4" onClick={() => setIsQuickOrderOpen(false)}>
+          <form onSubmit={(event) => { event.preventDefault(); setQuickOrderSent(true); }} onClick={(event) => event.stopPropagation()} className="bg-white rounded-lg p-6 w-full max-w-md space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Купить в один клик</h2>
+              <button type="button" onClick={() => setIsQuickOrderOpen(false)} className="text-2xl text-gray-500">×</button>
+            </div>
+            {quickOrderSent ? (
+              <div className="text-center py-6">
+                <p className="text-green-600 font-semibold">Заявка отправлена!</p>
+                <p className="text-gray-600 mt-2">Мы скоро свяжемся с вами.</p>
+                <button type="button" onClick={() => { setIsQuickOrderOpen(false); setQuickOrderSent(false); }} className="mt-5 bg-orange-600 text-white px-5 py-2 rounded">Закрыть</button>
+              </div>
+            ) : (
+              <>
+                <p className="text-gray-600">{product.title}</p>
+                <input required name="name" placeholder="Ваше имя" className="w-full border rounded px-3 py-3" />
+                <input required name="phone" type="tel" placeholder="Номер телефона" className="w-full border rounded px-3 py-3" />
+                <button type="submit" className="w-full bg-orange-600 text-white py-3 rounded hover:bg-orange-700">Отправить заявку</button>
+              </>
+            )}
+          </form>
+        </div>
+      )}
     </div>
   );
 };

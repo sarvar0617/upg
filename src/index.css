@@ -40,6 +40,6 @@
   background-color: #ff6518 !important;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+button {
+  cursor: pointer;
+}

@@ -7,9 +7,12 @@ import { GrContact } from "react-icons/gr";
 import { SlBasket } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { useCurrency } from "../context/CurrencyContext";
+import { useProducts } from "../context/ProductContext";
 
 const Header = () => {
   const { currency, toggleCurrency } = useCurrency();
+  const { cart } = useProducts();
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className="shadow-md bg-white w-full">
@@ -54,10 +57,11 @@ const Header = () => {
             </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-            <Link to="/cart" className="flex items-center gap-1">
+            <Link to="/cart" className="flex items-center gap-1 relative">
               <SlBasket size={18} />
 
               <span>Корзина</span>
+              {cartCount > 0 && <span className="absolute -top-3 -right-4 min-w-5 h-5 px-1 rounded-full bg-orange-600 text-white text-xs flex items-center justify-center">{cartCount}</span>}
             </Link>
           </li>
           <li className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
@@ -81,7 +85,10 @@ const Header = () => {
         {/* Mobile icons */}
         <div className="flex lg:hidden items-center gap-3 text-gray-600">
           <CiSearch size={22} className="block md:hidden" />
-          <SlBasket size={20} />
+          <Link to="/cart" className="relative cursor-pointer">
+            <SlBasket size={20} />
+            {cartCount > 0 && <span className="absolute -top-3 -right-3 min-w-5 h-5 px-1 rounded-full bg-orange-600 text-white text-xs flex items-center justify-center">{cartCount}</span>}
+          </Link>
           <FaRegUserCircle size={20} />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import ImageSlider from "../components/ProductSlider";
-import { FaStar } from "react-icons/fa";
+import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaStar } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 
 import { Link } from "react-router-dom";
@@ -10,9 +10,11 @@ import AboutHelp from "../components/AboutHelp";
 import Supports from "./Supports";
 import { useCurrency } from "../context/CurrencyContext";
 import { useGetAllProductsQuery } from "../services/ProductApi";
+import { useProducts } from "../context/ProductContext";
 
 const Home = () => {
   const { formatPrice } = useCurrency();
+  const { cart, addToCart, updateCartQuantity, toggleFavorite, isFavorite } = useProducts();
   const { data, error, isLoading } = useGetAllProductsQuery();
   const newProduct = data?.newProducts || [];
   const bestOffers = data?.bestOffers || [];
@@ -28,9 +30,12 @@ const Home = () => {
         <div className="grid sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 mt-6">
           {newProduct.map((product, index) => (
             <div
-              className="bg-white border-1 border-[#00000018] shadow-lg rounded-lg p-4 w-full flex flex-col justify-between h-full min-h-[380px]"
+              className="relative bg-white border-1 border-[#00000018] shadow-lg rounded-lg p-4 w-full flex flex-col justify-between h-full min-h-[380px]"
               key={index}
             >
+              <button type="button" onClick={() => toggleFavorite(product)} aria-label="Добавить в избранное" className="absolute top-4 right-4 z-10 cursor-pointer text-pink-500 text-xl">
+                {isFavorite(product.id) ? <FaHeart /> : <FaRegHeart />}
+              </button>
               <Link
                 to={`/productdetail/${product.id}`}
                 className="flex items-center gap-2"
@@ -63,9 +68,17 @@ const Home = () => {
                 <p className="text-lg font-bold text-gray-700 mt-1">
                   {formatPrice(product.price)}
                 </p>
-                <button className="bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
-                  <SlBasket className="" size={20} /> В корзину
-                </button>
+                {cart.find((item) => item.id === product.id) ? (
+                  <div className="mt-4 w-full h-10 flex items-center justify-center gap-5 border border-orange-600 rounded-md text-orange-600">
+                    <button type="button" onClick={() => updateCartQuantity(product.id, cart.find((item) => item.id === product.id).quantity - 1)} className="cursor-pointer p-2"><FaMinus size={12} /></button>
+                    <span className="font-bold">{cart.find((item) => item.id === product.id).quantity}</span>
+                    <button type="button" onClick={() => updateCartQuantity(product.id, cart.find((item) => item.id === product.id).quantity + 1)} className="cursor-pointer p-2"><FaPlus size={12} /></button>
+                  </div>
+                ) : (
+                  <button type="button" onClick={() => addToCart(product)} className="cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
+                    <SlBasket size={20} /> В корзину
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -76,9 +89,12 @@ const Home = () => {
         <div className="grid sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 mt-6">
           {bestOffers.map((product, index) => (
             <div
-              className="bg-white border-1 border-[#00000018] shadow-lg rounded-lg p-4 w-full flex flex-col justify-between h-full min-h-[380px]"
+              className="relative bg-white border-1 border-[#00000018] shadow-lg rounded-lg p-4 w-full flex flex-col justify-between h-full min-h-[380px]"
               key={index}
             >
+              <button type="button" onClick={() => toggleFavorite(product)} aria-label="Добавить в избранное" className="absolute top-4 right-4 z-10 cursor-pointer text-pink-500 text-xl">
+                {isFavorite(product.id) ? <FaHeart /> : <FaRegHeart />}
+              </button>
               <Link
                 to={`/productdetail/${product.id}`}
                 className="flex items-center gap-2"
@@ -111,9 +127,17 @@ const Home = () => {
                 <p className="text-lg font-bold text-gray-700 mt-1">
                   {formatPrice(product.price)}
                 </p>
-                <button className="bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
-                  <SlBasket className="" size={20} /> В корзину
-                </button>
+                {cart.find((item) => item.id === product.id) ? (
+                  <div className="mt-4 w-full h-10 flex items-center justify-center gap-5 border border-orange-600 rounded-md text-orange-600">
+                    <button type="button" onClick={() => updateCartQuantity(product.id, cart.find((item) => item.id === product.id).quantity - 1)} className="cursor-pointer p-2"><FaMinus size={12} /></button>
+                    <span className="font-bold">{cart.find((item) => item.id === product.id).quantity}</span>
+                    <button type="button" onClick={() => updateCartQuantity(product.id, cart.find((item) => item.id === product.id).quantity + 1)} className="cursor-pointer p-2"><FaPlus size={12} /></button>
+                  </div>
+                ) : (
+                  <button type="button" onClick={() => addToCart(product)} className="cursor-pointer bg-orange-600 hover:bg-orange-100 hover:text-orange-600 transition text-white mt-4 w-full h-10 rounded-md flex justify-center gap-3 items-center">
+                    <SlBasket size={20} /> В корзину
+                  </button>
+                )}
               </div>
             </div>
           ))}

@@ -14,6 +14,7 @@ import Favorites from "./pages/Favorites";
 import Sms from "./pages/auth/Sms";
 import Team from "./pages/Team";
 import Faq from "./pages/Faq";
+import Products from "./pages/Products";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="team" element={<Team />} />
           <Route path="cart" element={<Cart />} />
           <Route path="productdetail/:id" element={<ProductDeatail />} />
+          <Route path="products" element={<Products />} />
           <Route path="register" element={<Register />} />
           <Route path="sms" element={<Sms />} />
           <Route path="*" element={<div>404 Not Found</div>} />

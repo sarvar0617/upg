@@ -39,13 +39,35 @@ export const ProductProvider = ({ children }) => {
     });
   }, []);
 
+  const updateCartQuantity = useCallback((id, quantity) => {
+    setCart((current) => {
+      const next = quantity <= 0
+        ? current.filter((item) => item.id !== id)
+        : current.map((item) => item.id === id ? { ...item, quantity } : item);
+      persist("upg-cart", next);
+      return next;
+    });
+  }, []);
+
+  const removeFromCart = useCallback((id) => {
+    updateCartQuantity(id, 0);
+  }, [updateCartQuantity]);
+
+  const clearCart = useCallback(() => {
+    persist("upg-cart", []);
+    setCart([]);
+  }, []);
+
   const value = useMemo(() => ({
     favorites,
     cart,
     toggleFavorite,
     addToCart,
+    updateCartQuantity,
+    removeFromCart,
+    clearCart,
     isFavorite: (id) => favorites.some((item) => item.id === id),
-  }), [favorites, cart, addToCart, toggleFavorite]);
+  }), [favorites, cart, toggleFavorite, addToCart, updateCartQuantity, removeFromCart, clearCart]);
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;
 };

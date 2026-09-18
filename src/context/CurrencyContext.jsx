@@ -44,9 +44,9 @@ export const CurrencyProvider = ({ children }) => {
     if (currency === "USD") {
       if (!exchangeRate) return "Kurs yuklanmoqda...";
 
-      return `${(Number(priceUzs) / exchangeRate).toLocaleString("en-US", {
-        maximumFractionDigits: 2,
-      })} USD`;
+      const priceUsd = Math.round(Number(priceUzs) / exchangeRate);
+
+      return `${priceUsd.toLocaleString("en-US")} USD`;
     }
 
     return `${Number(priceUzs).toLocaleString("ru-RU")} UZS`;
