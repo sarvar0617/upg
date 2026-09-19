@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1";
-const useSupabase = !import.meta.env.VITE_API_URL && Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace(/\/$/, "");
 
 const normalizeProduct = (product) => ({
   ...product,
   id: product.id ?? product.slug,
+  slug: product.slug ?? product.id,
   title: product.title ?? product.name,
   brand: product.brand?.name ?? product.brand_name ?? product.brand ?? "",
   image: product.image ?? product.image_url ?? product.images?.[0] ?? "",
@@ -15,29 +13,17 @@ const normalizeProduct = (product) => ({
   isNew: product.isNew ?? product.is_new ?? false,
   isFeatured: product.isFeatured ?? product.is_featured ?? false,
   categoryId: product.categoryId ?? product.category_id,
+  categorySlug: product.category?.slug ?? product.category_slug ?? "",
 });
 
 export const ProductApi = createApi({
   reducerPath: "ProductApi",
-  baseQuery: useSupabase
-    ? fetchBaseQuery({
-        baseUrl: `${SUPABASE_URL}/rest/v1`,
-        prepareHeaders: (headers) => {
-          headers.set("apikey", SUPABASE_ANON_KEY);
-          headers.set("Authorization", `Bearer ${SUPABASE_ANON_KEY}`);
-          return headers;
-        },
-      })
-    : fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () =>
-        useSupabase
-          ? "products?select=*&limit=100"
-          : "products?limit=100",
+      query: () => "products?page=1&limit=1000",
       transformResponse: (response) => {
-        const products = (useSupabase ? response : response.data).map(normalizeProduct);
-
+        const products = (response?.data || []).map(normalizeProduct);
         return {
           newProducts: products.filter((product) => product.isNew),
           bestOffers: products.filter((product) => product.isFeatured),
@@ -45,16 +31,27 @@ export const ProductApi = createApi({
         };
       },
     }),
+    getCategories: builder.query({
+      query: () => "categories",
+      transformResponse: (response) => response?.data || [],
+    }),
+    getProductsByCategorySlug: builder.query({
+      query: (slug) => `categories/${encodeURIComponent(slug)}/products`,
+      transformResponse: (response) => ({
+        category: response?.data?.category || null,
+        products: (response?.data?.products || []).map(normalizeProduct),
+      }),
+    }),
     getProductBySlug: builder.query({
-      query: (slug) =>
-        useSupabase
-          ? `products?select=*&or=(slug.eq.${encodeURIComponent(slug)},id.eq.${encodeURIComponent(slug)})&limit=1`
-          : `products/${slug}`,
-      transformResponse: (response) => {
-        const product = useSupabase ? response[0] : response.data;
-        return product ? normalizeProduct(product) : null;
-      },
+      query: (slug) => `products/${encodeURIComponent(slug)}`,
+      transformResponse: (response) => (response?.data ? normalizeProduct(response.data) : null),
     }),
   }),
 });
-export const { useGetAllProductsQuery, useGetProductBySlugQuery } = ProductApi;
+
+export const {
+  useGetAllProductsQuery,
+  useGetCategoriesQuery,
+  useGetProductsByCategorySlugQuery,
+  useGetProductBySlugQuery,
+} = ProductApi;

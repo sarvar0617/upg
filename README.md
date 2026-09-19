@@ -1,12 +1,26 @@
-# React + Vite
+# UPG storefront
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The storefront reads products and categories from the backend API. Product and
+category URLs use the backend `slug` fields, so the API and storefront must use
+the same deployed data. The catalog request allows up to 1,000 products so
+larger imports are not silently truncated on the home and unfiltered catalog
+surfaces.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create `.env.local` from `.env.example`, set `VITE_API_URL` to the backend API
+base including `/api/v1`, then run:
 
-## Expanding the ESLint configuration
+```sh
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Do not commit `.env.local` or any backend/admin token. Supabase credentials are
+not required by this frontend; the backend owns database access.
+
+## Vercel
+
+Set `VITE_API_URL` in the Vercel project for the storefront before building,
+for example `https://<render-service>.onrender.com/api/v1`. Redeploy after
+changing it. The backend must allow the Vercel origin through its CORS policy.

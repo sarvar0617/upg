@@ -3,55 +3,44 @@ import { Link, useSearchParams } from "react-router-dom";
 import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaStar } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 import Components from "../json/Components.json";
-import NewProduct from "../json/NewProduct.json";
-import BestOffers from "../json/BestOffers.json";
 import { useCurrency } from "../context/CurrencyContext";
 import { useProducts } from "../context/ProductContext";
-
-const productsByCategory = {
-  21: [2, 3, 4, 7, 14], // Клавиатуры
-  22: [15, 17], // Мыши
-  23: [6, 13], // Микрофоны
-  24: [5, 18], // Наушники
-  25: [16], // Мониторы
-  26: [1, 8], // Кронштейны
-  27: [], // Колонки
-  28: [], // Коврики
-  29: [], // Ноутбуки
-  30: [10], // Консоли
-  31: [19], // Контроллеры
-  32: [11], // Wi-Fi адаптеры
-  33: [9], // Корпуса
-  34: [], // Процессоры
-  35: [], // Видеокарты
-  36: [], // Оперативная память
-  37: [], // Материнские платы
-  38: [], // SSD диски
-  39: [], // Кулеры
-  40: [], // Блоки питания
-  41: [20], // Столы
-  42: [], // Кресла
-  43: [12], // Освещение
-  44: [], // Аксессуары
-};
+import {
+  useGetAllProductsQuery,
+  useGetCategoriesQuery,
+  useGetProductsByCategorySlugQuery,
+} from "../services/ProductApi";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
   const { formatPrice } = useCurrency();
   const { cart, addToCart, updateCartQuantity, toggleFavorite, isFavorite } = useProducts();
-  const categoryId = Number(searchParams.get("category"));
-  const category = Components.find((item) => item.id === categoryId);
-  const allProducts = [...NewProduct, ...BestOffers];
-  const productIds = productsByCategory[categoryId] || [];
-  const products = allProducts.filter((product) => productIds.includes(product.id));
+  const requestedCategory = searchParams.get("category") || "";
+  const legacyCategory = Components.find((item) => String(item.id) === requestedCategory);
+  const { data: categories = [], isLoading: categoriesLoading } = useGetCategoriesQuery();
+  const backendCategory = categories.find((item) => (
+    item.slug === requestedCategory
+    || (legacyCategory && item.name.localeCompare(legacyCategory.title, undefined, { sensitivity: "base" }) === 0)
+  ));
+  const categorySlug = backendCategory?.slug || (!legacyCategory ? requestedCategory : "");
+  const categoryQuery = useGetProductsByCategorySlugQuery(categorySlug, { skip: !categorySlug });
+  const allQuery = useGetAllProductsQuery(undefined, { skip: Boolean(categorySlug) });
+  const category = categoryQuery.data?.category || backendCategory || legacyCategory;
+  const products = categorySlug ? categoryQuery.data?.products || [] : allQuery.data?.products || [];
+  const error = categorySlug ? categoryQuery.error : allQuery.error;
+  const isLoading = categoriesLoading || (categorySlug ? categoryQuery.isLoading : allQuery.isLoading);
 
   return (
     <div className="container mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10">
       <h1 className="text-2xl sm:text-3xl font-[terminatorgen]">
-        {category?.title || "Товары"}
+        {category?.name || category?.title || "Товары"}
       </h1>
 
-      {products.length === 0 ? (
+      {isLoading ? (
+        <p className="mt-8 text-lg text-gray-600">Загрузка товаров...</p>
+      ) : error ? (
+        <p className="mt-8 text-lg text-red-600">Не удалось загрузить товары.</p>
+      ) : products.length === 0 ? (
         <p className="mt-8 text-lg text-gray-600">
           В этой категории пока нет товаров.
         </p>
@@ -65,7 +54,7 @@ const Products = () => {
               <button type="button" onClick={() => toggleFavorite(product)} aria-label="Добавить в избранное" className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 cursor-pointer text-pink-500 text-lg sm:text-xl">
                 {isFavorite(product.id) ? <FaHeart /> : <FaRegHeart />}
               </button>
-              <Link to={`/productdetail/${product.id}`}>
+              <Link to={`/productdetail/${product.slug}`}>
                 <div className="w-full h-28 sm:h-48 overflow-hidden flex items-center justify-center">
                   <img
                     src={product.image}
