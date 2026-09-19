@@ -11,6 +11,45 @@ import {
   useGetProductsByCategorySlugQuery,
 } from "../services/ProductApi";
 
+const categoryAliases = {
+  "Клавиатуры": ["keyboards"],
+  "Мыши": ["mice", "mouse"],
+  "Микрофоны": ["microphones"],
+  "Наушники": ["headphones", "headsets"],
+  "Мониторы": ["monitors"],
+  "Кронштейны": ["mounts", "stands"],
+  "Колонки": ["speakers"],
+  "Коврики": ["mouse-pads", "mousepads"],
+  "Ноутбуки": ["laptops", "notebooks"],
+  "Консоли": ["consoles"],
+  "Контроллеры": ["controllers", "gamepads"],
+  "Wi-Fi адаптеры": ["wifi-adapters", "wi-fi-adapters"],
+  "Корпуса": ["cases", "computer-cases"],
+  "Процессоры": ["processors", "cpus"],
+  "Видеокарты": ["graphics-cards", "video-cards", "gpus"],
+  "Оперативная память": ["ram", "memory"],
+  "Материнские платы": ["motherboards"],
+  "SSD диски": ["ssds", "ssd"],
+  "Кулеры": ["coolers"],
+  "Блоки питания": ["power-supplies", "psus"],
+  "Столы": ["desks", "tables"],
+  "Кресла": ["chairs"],
+  "Освещение": ["lighting"],
+  "Аксессуары": ["accessories"],
+};
+
+const slugify = (value) => value
+  .toLowerCase()
+  .replace(/[ё]/g, "е")
+  .replace(/[а-я]/g, (letter) => ({
+    а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ж: "zh", з: "z",
+    и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o", п: "p",
+    р: "r", с: "s", т: "t", у: "u", ф: "f", х: "h", ц: "ts", ч: "ch",
+    ш: "sh", щ: "shch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya",
+  }[letter] || ""))
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "");
+
 const Products = () => {
   const [searchParams] = useSearchParams();
   const { formatPrice } = useCurrency();
@@ -18,13 +57,17 @@ const Products = () => {
   const requestedCategory = searchParams.get("category") || "";
   const legacyCategory = Components.find((item) => String(item.id) === requestedCategory);
   const { data: categories = [], isLoading: categoriesLoading } = useGetCategoriesQuery();
+  const categoryCandidates = legacyCategory
+    ? [slugify(legacyCategory.title), ...(categoryAliases[legacyCategory.title] || [])]
+    : [requestedCategory];
   const backendCategory = categories.find((item) => (
     item.slug === requestedCategory
+    || categoryCandidates.includes(item.slug)
     || (legacyCategory && item.name.localeCompare(legacyCategory.title, undefined, { sensitivity: "base" }) === 0)
   ));
-  const categorySlug = backendCategory?.slug || (!legacyCategory ? requestedCategory : "");
+  const categorySlug = backendCategory?.slug || categoryCandidates[0] || requestedCategory;
   const categoryQuery = useGetProductsByCategorySlugQuery(categorySlug, { skip: !categorySlug });
-  const allQuery = useGetAllProductsQuery(undefined, { skip: Boolean(categorySlug) });
+  const allQuery = useGetAllProductsQuery(undefined, { skip: Boolean(requestedCategory) });
   const category = categoryQuery.data?.category || backendCategory || legacyCategory;
   const products = categorySlug ? categoryQuery.data?.products || [] : allQuery.data?.products || [];
   const error = categorySlug ? categoryQuery.error : allQuery.error;

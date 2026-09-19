@@ -16,8 +16,11 @@ const Home = () => {
   const { formatPrice } = useCurrency();
   const { cart, addToCart, updateCartQuantity, toggleFavorite, isFavorite } = useProducts();
   const { data, error, isLoading } = useGetAllProductsQuery();
-  const newProduct = data?.newProducts || [];
-  const bestOffers = data?.bestOffers || [];
+  const newProduct = (data?.newProducts || []).slice(0, 10);
+  const newProductIds = new Set(newProduct.map((product) => product.id));
+  const bestOffers = (data?.bestOffers || [])
+    .filter((product) => !newProductIds.has(product.id))
+    .slice(0, 10);
 
   if (isLoading) return <div className="container mx-auto px-4 py-10">Loading...</div>;
   if (error) return <div className="container mx-auto px-4 py-10">Mahsulotlarni yuklashda xatolik yuz berdi.</div>;
