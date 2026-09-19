@@ -60,11 +60,16 @@ const Products = () => {
   const categoryCandidates = legacyCategory
     ? [slugify(legacyCategory.title), ...(categoryAliases[legacyCategory.title] || [])]
     : [requestedCategory];
-  const backendCategory = categories.find((item) => (
-    item.slug === requestedCategory
-    || categoryCandidates.includes(item.slug)
+  const directCategory = categories.find((item) => item.slug === requestedCategory);
+  const matchingCategories = categories.filter((item) => (
+    categoryCandidates.includes(item.slug)
     || (legacyCategory && item.name.localeCompare(legacyCategory.title, undefined, { sensitivity: "base" }) === 0)
   ));
+  const backendCategory = directCategory || matchingCategories
+    .slice()
+    .sort((left, right) => (
+      Number(right._count?.products || 0) - Number(left._count?.products || 0)
+    ))[0];
   const categorySlug = backendCategory?.slug || categoryCandidates[0] || requestedCategory;
   const categoryQuery = useGetProductsByCategorySlugQuery(categorySlug, { skip: !categorySlug });
   const allQuery = useGetAllProductsQuery(undefined, { skip: Boolean(requestedCategory) });
